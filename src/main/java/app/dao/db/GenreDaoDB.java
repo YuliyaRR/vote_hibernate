@@ -18,11 +18,10 @@ public class GenreDaoDB implements IGenreDao {
     @Override
     public List<GenreEntity> getGenreList() {
         EntityManager entityManager =  null;
-        List<GenreEntity> resultList;
         try {
             entityManager = manager.getEntityManager();
             entityManager.getTransaction().begin();
-            resultList = entityManager.createQuery("from GenreEntity", GenreEntity.class).getResultList();
+            List<GenreEntity> resultList = entityManager.createQuery("from GenreEntity", GenreEntity.class).getResultList();
             entityManager.getTransaction().commit();
 
             return resultList;

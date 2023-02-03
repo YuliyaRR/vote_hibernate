@@ -18,12 +18,13 @@ public class SingerDaoDB implements ISingerDao {
     @Override
     public List<SingerEntity> getSingerList() {
         EntityManager entityManager = null;
-        List<SingerEntity> resultList;
         try {
             entityManager = manager.getEntityManager();
             entityManager.getTransaction().begin();
-            resultList = entityManager.createQuery("from SingerEntity", SingerEntity.class).getResultList();
+            List<SingerEntity> resultList = entityManager.createQuery("from SingerEntity", SingerEntity.class).getResultList();
             entityManager.getTransaction().commit();
+
+            return resultList;
 
         } catch (Exception e) {
             throw new RuntimeException("Database connection error", e);
@@ -32,12 +33,10 @@ public class SingerDaoDB implements ISingerDao {
                 entityManager.close();
             }
         }
-        return resultList;
     }
 
     @Override
     public boolean isContain(int id) {
-
         EntityManager entityManager = null;
         try {
             entityManager = manager.getEntityManager();
@@ -122,6 +121,7 @@ public class SingerDaoDB implements ISingerDao {
             }
         }
     }
+
     @Override
     public SingerEntity get(int id) {
         EntityManager entityManager = null;
