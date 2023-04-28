@@ -4,14 +4,22 @@ import java.util.Objects;
 
 public class GenreDTO {
     private String name;
-    private int id;
+    private Integer id;
 
-    public GenreDTO(String name, int id) {
+    public GenreDTO(String name, Integer id) {
         this.name = name;
         this.id = id;
     }
 
     public GenreDTO() {
+    }
+
+    public GenreDTO(Integer id) {
+        this.id = id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -22,12 +30,8 @@ public class GenreDTO {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class GenreDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GenreDTO genreDTO = (GenreDTO) o;
-        return id == genreDTO.id && Objects.equals(name, genreDTO.name);
+        return Objects.equals(id, genreDTO.id) && Objects.equals(name, genreDTO.name);
     }
 
     @Override
