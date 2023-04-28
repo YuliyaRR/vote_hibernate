@@ -33,14 +33,6 @@ public class VoiceEntity {
     public VoiceEntity() {
     }
 
-     public VoiceEntity(SingerEntity singer, List<GenreEntity> genres, String message, String email, LocalDateTime creationTime) {
-        this.singer = singer;
-        this.genres = genres;
-        this.message = message;
-        this.email = email;
-        this.time = creationTime;
-    }
-
     public VoiceEntity(SingerEntity singer, List<GenreEntity> genres, String message, String email) {
         this.singer = singer;
         this.genres = genres;
