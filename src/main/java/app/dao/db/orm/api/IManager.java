@@ -1,4 +1,4 @@
-package app.orm.api;
+package app.dao.db.orm.api;
 
 import javax.persistence.EntityManager;
 

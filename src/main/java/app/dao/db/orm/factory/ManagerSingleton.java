@@ -1,7 +1,7 @@
-package app.orm.factory;
+package app.dao.db.orm.factory;
 
-import app.orm.api.IManager;
-import app.orm.manager.Manager;
+import app.dao.db.orm.api.IManager;
+import app.dao.db.orm.manager.Manager;
 
 public class ManagerSingleton {
     private volatile static IManager instance;
