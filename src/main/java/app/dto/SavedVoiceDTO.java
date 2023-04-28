@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SavedVoiceDTO {
-    private SingerDTO singer;
-    private List<GenreDTO> genres;
+    private Integer singer;
+    private List<Integer>genres;
     private String message;
     private String email;
     private LocalDateTime dtCreate;
 
-    public SavedVoiceDTO(SingerDTO singer, List<GenreDTO> genres, String message, String email, LocalDateTime dtCreate) {
+    public SavedVoiceDTO(int singer, List<Integer> genres, String message, String email, LocalDateTime dtCreate) {
         this.singer = singer;
         this.genres = genres;
         this.message = message;
@@ -19,11 +19,11 @@ public class SavedVoiceDTO {
         this.dtCreate = dtCreate;
     }
 
-    public SingerDTO getSinger() {
+    public Integer getSinger() {
         return singer;
     }
 
-    public List<GenreDTO> getGenres() {
+    public List<Integer> getGenres() {
         return genres;
     }
 
@@ -39,26 +39,6 @@ public class SavedVoiceDTO {
         return dtCreate;
     }
 
-    public void setSinger(SingerDTO singer) {
-        this.singer = singer;
-    }
-
-    public void setGenres(List<GenreDTO> genres) {
-        this.genres = genres;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setDtCreate(LocalDateTime dtCreate) {
-        this.dtCreate = dtCreate;
-    }
-
     @Override
     public String toString() {
         return "SavedVoiceDTO{" +
@@ -71,8 +51,8 @@ public class SavedVoiceDTO {
     }
 
     public static class SavedVoteBuilder {
-        private SingerDTO singer;
-        private List<GenreDTO> genres = new ArrayList<>();
+        private Integer singer;
+        private List<Integer>genres = new ArrayList<>();
         private String message;
         private String email;
         private LocalDateTime dtCreate;
@@ -84,18 +64,18 @@ public class SavedVoiceDTO {
             return new SavedVoteBuilder();
         }
 
-        public SavedVoteBuilder setSinger(SingerDTO singer) {
+        public SavedVoteBuilder setSinger(Integer singer) {
             this.singer = singer;
             return this;
         }
 
-        public SavedVoteBuilder setGenres(List<GenreDTO> genres) {
+        public SavedVoteBuilder setGenres(List<Integer> genres) {
             this.genres = genres;
             return this;
         }
 
-       public SavedVoteBuilder addGenre(GenreDTO genreDTO){
-            this.genres.add(genreDTO);
+        public SavedVoteBuilder addGenre(Integer genre){
+            this.genres.add(genre);
             return this;
         }
 
@@ -119,7 +99,7 @@ public class SavedVoiceDTO {
         }
 
         public SavedVoiceDTO build(){
-            List<GenreDTO>copyGenres = List.copyOf(this.genres);
+            List<Integer>copyGenres = List.copyOf(this.genres);
             clearListGenres();
             return new SavedVoiceDTO(singer, copyGenres, message, email, dtCreate);
         }
