@@ -2,7 +2,7 @@ package app.dao.db;
 
 import app.dao.api.IGenreDao;
 import app.entity.GenreEntity;
-import app.orm.api.IManager;
+import app.dao.db.orm.api.IManager;
 
 import javax.persistence.EntityManager;
 import java.util.List;

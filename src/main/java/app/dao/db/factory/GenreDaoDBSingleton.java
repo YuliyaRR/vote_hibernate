@@ -2,7 +2,7 @@ package app.dao.db.factory;
 
 import app.dao.db.GenreDaoDB;
 import app.dao.api.IGenreDao;
-import app.orm.factory.ManagerSingleton;
+import app.dao.db.orm.factory.ManagerSingleton;
 
 import java.beans.PropertyVetoException;
 

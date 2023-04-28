@@ -2,7 +2,7 @@ package app.dao.db;
 
 import app.dao.api.IVotingDao;
 import app.entity.VoiceEntity;
-import app.orm.api.IManager;
+import app.dao.db.orm.api.IManager;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -14,7 +14,6 @@ public class VotingDaoDB implements IVotingDao {
     public VotingDaoDB(IManager manager) {
         this.manager = manager;
     }
-
 
     @Override
     public List<VoiceEntity> getVoiceList() {
@@ -51,7 +50,6 @@ public class VotingDaoDB implements IVotingDao {
                 entityManager.close();
             }
         }
-
-
     }
+
 }
