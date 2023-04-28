@@ -52,4 +52,8 @@ public class SingerEntity {
         return Objects.hash(id, name);
     }
 
+    @Override
+    public String toString() {
+        return "id = " + id + ", name= " + name;
+    }
 }
