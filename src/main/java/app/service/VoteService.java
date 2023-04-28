@@ -1,15 +1,13 @@
 package app.service;
 
 import app.dao.api.IVotingDao;
-import app.dto.GenreDTO;
 import app.dto.SavedVoiceDTO;
-import app.dto.SingerDTO;
 import app.entity.GenreEntity;
 import app.entity.VoiceEntity;
 import app.dto.VoiceDTO;
 import app.entity.SingerEntity;
 import app.service.api.IGenreService;
-import app.service.api.ISendMailService;
+import app.service.api.IMailService;
 import app.service.api.ISingerService;
 import app.service.api.IVotesService;
 
@@ -24,10 +22,10 @@ public class VoteService implements IVotesService {
 
     private final IGenreService genreService;
 
-    private final ISendMailService mailService;
+    private final IMailService mailService;
 
     public VoteService(IVotingDao voiceDao, ISingerService singerService,
-                       IGenreService genreService, ISendMailService mailService) {
+                       IGenreService genreService, IMailService mailService) {
         this.votingDao = voiceDao;
         this.singerService = singerService;
         this.genreService = genreService;
@@ -43,18 +41,19 @@ public class VoteService implements IVotesService {
         String message = voice.getMessage();
         String email = voice.getEmail();
 
-        SingerEntity singerEntity = new SingerEntity(singer);
+        SingerEntity singerEntity = new SingerEntity(singer, singerService.getSinger(singer).getName());
 
-        List<GenreEntity>listGenre = new ArrayList<>();// modify to stream
+        List<GenreEntity>listGenre = new ArrayList<>();
         for (int genre : genres) {
-            listGenre.add(new GenreEntity(genre));
+            listGenre.add(new GenreEntity(genre, genreService.getGenre(genre).getName()));
         }
 
         VoiceEntity savedVoice = new VoiceEntity(singerEntity, listGenre, message, email);
 
         votingDao.save(savedVoice);
 
-        mailService.send(savedVoice);
+        mailService.send(mailService.save(savedVoice));
+
     }
 
     @Override
@@ -65,13 +64,11 @@ public class VoteService implements IVotesService {
 
         for (VoiceEntity voiceEntity : voiceList) {
             SingerEntity singer = voiceEntity.getSinger();
-            SingerDTO singerDTO = singerService.getSinger(singer.getId());
-            savedVoteBuilder.setSinger(singerDTO);
+            savedVoteBuilder.setSinger(singer.getId());
 
             List<GenreEntity> genres = voiceEntity.getGenres();
             for (GenreEntity genre : genres) {
-                GenreDTO genreDTO = genreService.getGenre(genre.getId());
-                savedVoteBuilder.addGenre(genreDTO);
+                savedVoteBuilder.addGenre(genre.getId());
             }
 
             SavedVoiceDTO savedVoiceDTO = savedVoteBuilder
@@ -130,4 +127,5 @@ public class VoteService implements IVotesService {
             throw new IllegalArgumentException("Invalid: check the correctness of the entered e-mail");
         }
     }
+
 }
